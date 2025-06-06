@@ -1,14 +1,14 @@
-import "./global.css";
+import "../../global.css";
 import { StatusBar } from "expo-status-bar";
 import { View, FlatList } from "react-native";
 
-import BookListItem from "./src/components/BookListItem";
+import BookListItem from "../components/BookListItem";
 
-import books from "./src/dummyBooks";
+import books from "../dummyBooks";
 
 export default function App() {
   return (
-    <View className="bg-slate-950 flex-1 justify-center p-4 pt-20">
+    <View className="bg-slate-800 flex-1 justify-center p-4 pt-20">
       {/* Renders list of componenets. */}
       {/* Required fields: data - array of things we want to render, renderItem - how do i want to render them  */}
       <FlatList
