@@ -1,34 +1,27 @@
 import "./global.css";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, Image } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { View, FlatList } from "react-native";
+
+import BookListItem from "./src/components/BookListItem";
 
 import books from "./src/dummyBooks";
 
-const book = books[0];
-
 export default function App() {
   return (
-    <View className="bg-slate-950 flex-1 justify-center p-4">
-      {/* Book Row */}
-      <View className="flex-row gap-2 items-center">
-        <Image
-          source={{ uri: book.thumbnail_url }}
-          className="w-16 aspect-square rounded-md"
-        />
-        <View className="flex-col flex-1 gap-1">
-          <Text className="text-2xl text-gray-100 font-bold">{book.title}</Text>
-          <Text className="text-gray-400">{book.author}</Text>
-        </View>
+    <View className="bg-slate-950 flex-1 justify-center p-4 pt-20">
+      {/* Renders list of componenets. */}
+      {/* Required fields: data - array of things we want to render, renderItem - how do i want to render them  */}
+      <FlatList
+        data={books}
+        renderItem={({ item }) => <BookListItem book={item} />}
+        // keyExtractor={(book) => book.id}
 
-        <AntDesign
-          name="playcircleo"
-          size={24}
-          color="gainsboro"
-          className=""
-        />
-      </View>
-
+        // We can manage spacing on component level, but they can be reused somwhere else and its better to manage spacing at
+        // list level so we can do distinct spacing at each place we reused our component
+        // contentContainerStyle={{ gap: 3 }}
+        // Both can be used to styling but we can use below to use tailwind classes
+        contentContainerClassName="gap-3"
+      />
       <StatusBar style="auto" />
     </View>
   );
