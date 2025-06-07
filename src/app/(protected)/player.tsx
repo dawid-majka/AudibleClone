@@ -8,11 +8,17 @@ import dummyBooks from "@/dummyBooks";
 import { Ionicons } from "@expo/vector-icons";
 import PlaybackBar from "@/components/PlaybackBar";
 
+import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
+
 export default function Player() {
   const book = dummyBooks[0];
+  const player = useAudioPlayer({ uri: book.audio_url });
+  const playerStatus = useAudioPlayerStatus(player);
+
+  console.log(JSON.stringify(playerStatus, null, 2));
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 p-4 py-10">
+    <SafeAreaView className="flex-1 p-4 py-10 gap-4">
       <Pressable
         onPress={() => router.back()}
         className="absolute top-16 left-4 bg-gray-800 rounded-full p-2"
@@ -30,12 +36,22 @@ export default function Player() {
           {book.title}
         </Text>
 
-        <PlaybackBar value={0.1} />
+        <PlaybackBar
+          currentTime={player.currentTime}
+          duration={playerStatus.duration}
+        />
 
         <View className="flex-row items-center justify-between mt-8">
           <Ionicons name="play-skip-back" size={24} color="white" />
           <Ionicons name="play-back" size={24} color="white" />
-          <Ionicons name="play" size={50} color="white" />
+          <Ionicons
+            name={playerStatus.playing ? "pause" : "play"}
+            size={50}
+            color="white"
+            onPress={() =>
+              playerStatus.playing ? player.pause() : player.play()
+            }
+          />
           <Ionicons name="play-forward" size={24} color="white" />
           <Ionicons name="play-skip-forward" size={24} color="white" />
         </View>
