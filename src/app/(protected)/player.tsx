@@ -39,6 +39,7 @@ export default function Player() {
         <PlaybackBar
           currentTime={player.currentTime}
           duration={playerStatus.duration}
+          onSeek={(seconds) => player.seekTo(seconds)}
         />
 
         <View className="flex-row items-center justify-between mt-8">
