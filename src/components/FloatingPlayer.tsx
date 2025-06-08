@@ -2,7 +2,6 @@ import { Text, View, Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
-import dummyBooks from "@/dummyBooks";
 import { usePlayer } from "@/providers/PlayerProvider";
 import { useAudioPlayerStatus } from "expo-audio";
 

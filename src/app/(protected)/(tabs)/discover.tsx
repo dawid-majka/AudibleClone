@@ -2,7 +2,7 @@ import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import { useSupabase } from "@/lib/supabase";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import BookListItem from "@/components/BookListItem";
+import DiscoverBookListItem from "@/components/DiscoverBookListItem";
 
 export default function Discover() {
   const supabase = useSupabase();
@@ -20,11 +20,13 @@ export default function Discover() {
     return <Text>Error: {error.message}</Text>;
   }
 
+  console.log(JSON.stringify(data));
+
   return (
     <FlatList
       data={data?.data || []}
-      contentContainerClassName="gap-4 p-2"
-      renderItem={({ item }) => <BookListItem book={item} />}
+      contentContainerClassName="gap-3 p-2"
+      renderItem={({ item }) => <DiscoverBookListItem book={item} />}
     />
   );
 }
