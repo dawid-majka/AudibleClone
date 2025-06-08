@@ -3,16 +3,14 @@ import { Entypo } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import dummyBooks from "@/dummyBooks";
-
 import { Ionicons } from "@expo/vector-icons";
 import PlaybackBar from "@/components/PlaybackBar";
 
 import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
+import { usePlayer } from "@/providers/PlayerProvider";
 
-export default function Player() {
-  const book = dummyBooks[0];
-  const player = useAudioPlayer({ uri: book.audio_url });
+export default function PlayerScreen() {
+  const { player, book } = usePlayer();
   const playerStatus = useAudioPlayerStatus(player);
 
   console.log(JSON.stringify(playerStatus, null, 2));

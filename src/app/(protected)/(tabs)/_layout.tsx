@@ -1,6 +1,9 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
+import { BottomTabBar } from "@react-navigation/bottom-tabs";
+import FloatingPlayer from "@/components/FloatingPlayer";
+
 export default function RootLayout() {
   return (
     // We can customize whole Tabs like:
@@ -11,7 +14,14 @@ export default function RootLayout() {
     //     tabBarInactiveTintColor: "gray",
     //   }}
     // >
-    <Tabs>
+    <Tabs
+      tabBar={(props) => (
+        <>
+          <FloatingPlayer />
+          <BottomTabBar {...props} />
+        </>
+      )}
+    >
       <Tabs.Screen
         name="index"
         options={{

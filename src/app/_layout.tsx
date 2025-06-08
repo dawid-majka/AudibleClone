@@ -3,6 +3,7 @@ import { Slot } from "expo-router";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
+import PlayerProvider from "../providers/PlayerProvider";
 
 const theme = {
   ...DarkTheme,
@@ -18,7 +19,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={theme}>
       <ClerkProvider tokenCache={tokenCache}>
-        <Slot />
+        <PlayerProvider>
+          <Slot />
+        </PlayerProvider>
       </ClerkProvider>
     </ThemeProvider>
   );
